@@ -1,0 +1,238 @@
+<mvc:View
+    controllerName="com.inetum.cursoodatav4.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.uxap"
+    xmlns:t="sap.ui.table"
+    xmlns:l="sap.ui.layout"
+    xmlns:u="sap.ui.unified"
+    xmlns:core="sap.ui.core"
+    xmlns:m="sap.m"
+    xmlns:p="sap.m"
+    xmlns:semantic="sap.f.semantic"
+    xmlns:layout="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+>
+    <semantic:SemanticPage
+        id="mySemanticPage"
+        headerPinnable="true"
+        toggleHeaderOnTitleClick="true"
+        preserveHeaderStateOnScroll="false"
+        titleAreaShrinkRatio="1:1.6:1.6"
+        headerExpanded="false"
+    >
+        <semantic:titleHeading>
+            <m:VBox>
+                <m:HBox
+                    justifyContent="Start"
+                    alignItems="Inherit"
+                    displayInline="true"
+                >
+                    <m:Title
+                        text="Travel ID: {modeloLocal>/BookingLocal/0/TravelID}"
+                        level="H1"
+                        class="sapUiSmallMarginEnd"
+                    />
+                </m:HBox>
+            </m:VBox>
+        </semantic:titleHeading>
+        <semantic:titleCustomTextActions>
+            <m:Button
+                id="borrarRegistro"
+                text="{i18n>Borrar}"
+                enabled="true"
+                press="borrarRegistro"
+                icon="sap-icon://delete"
+            />
+            <m:Button
+                id="editarRegistro"
+                text="{i18n>Editar}"
+                enabled="true"
+                press="editarRegistro"
+                icon="sap-icon://edit"
+            />
+            <m:Button
+                id="updateRegistro"
+                text="{i18n>Guardar}"
+                enabled="{modeloLocal>/Editable}"
+                press="updateRegistro"
+                icon="sap-icon://save"
+            />
+        </semantic:titleCustomTextActions>
+
+        <semantic:headerContent />
+        <semantic:content>
+            <m:Panel>
+                <m:Panel
+                    id="panel01"
+                    headerText="{i18n>TablaBooking}"
+                    expandable="true"
+                    expanded="true"
+                >
+                    <m:Table
+                        id="idDetailsTable"
+                        sticky="HeaderToolbar,ColumnHeaders"
+                        inset="false"
+                        items="{
+							path: 'modeloLocal>/BookingLocal'
+						}"
+                        class="sapFDynamicPageAlignContent"
+                        width="auto"
+                        modeAnimationOn="true"
+                        growing="true"
+                        mode="None"
+                        growingScrollToLoad="true"
+                    >
+                        <m:columns>
+                            <m:Column width="auto">
+                                <m:Text text="{i18n>columnBookingID}" />
+                            </m:Column>
+                            <m:Column width="auto">
+                                <m:Text text="{i18n>columnBookingDate}" />
+                            </m:Column>
+                            <m:Column width="auto">
+                                <m:Text text="{i18n>columnCustomerID}" />
+                            </m:Column>
+                            <m:Column width="auto">
+                                <m:Text text="{i18n>columnAirlineID}" />
+                            </m:Column>
+                            <m:Column width="auto">
+                                <m:Text text="{i18n>columnConnectionID}" />
+                            </m:Column>
+                            <m:Column width="auto">
+                                <m:Text text="{i18n>columnFlightDate}" />
+                            </m:Column>
+                            <m:Column width="auto">
+                                <m:Text text="{i18n>columnFlightPrice}" />
+                            </m:Column>
+                            <m:Column width="auto">
+                                <m:Text text="{i18n>columnCurrencyCode}" />
+                            </m:Column>
+                        </m:columns>
+                        <m:items>
+                            <m:ColumnListItem>
+                                <m:cells>
+                                    <m:Text text="{modeloLocal>BookingID}" />
+                                    <m:Text text="{modeloLocal>BookingDate}" />
+                                    <m:Text text="{modeloLocal>CustomerID}" />
+                                    <m:Text text="{modeloLocal>AirlineID}" />
+                                    <m:Text text="{modeloLocal>ConnectionID}" />
+                                    <m:Text text="{modeloLocal>FlightDate}" />
+                                    <m:Text text="{modeloLocal>FlightPrice}" />
+                                    <m:Text text="{modeloLocal>CurrencyCode}" />
+                                </m:cells>
+                            </m:ColumnListItem>
+                        </m:items>
+                    </m:Table>
+                </m:Panel>
+                <m:Panel
+                    id="panel02"
+                    headerText="{i18n>formularioEditar}"
+                    expandable="true"
+                    expanded="true"
+                >
+                    <f:Form
+                        id="AgencyForm"
+                        editable="false"
+                    >
+                        <f:layout>
+                            <f:ResponsiveGridLayout
+                                labelSpanXL="12"
+                                labelSpanL="12"
+                                labelSpanM="12"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="6"
+                                columnsL="6"
+                                columnsM="6"
+                                singleContainerFullSize="false"
+                            />
+                        </f:layout>
+                        <f:formContainers>
+                            <f:FormContainer>
+                                <f:formElements>
+                                    <f:FormElement label="{i18n>columnBeginDate}">
+                                        <f:fields>
+                                            <m:Input
+                                                value="{modeloLocal>/TravelLocal/0/BeginDate}" editable="{modeloLocal>/Editable}"
+                                            />
+                                        </f:fields>
+                                    </f:FormElement>
+                                    <f:FormElement label="{i18n>columnEndDate}">
+                                        <f:fields>
+                                            <m:Input
+                                                value="{modeloLocal>/TravelLocal/0/EndDate}" editable="{modeloLocal>/Editable}"
+                                            />
+                                        </f:fields>
+                                    </f:FormElement>
+                                </f:formElements>
+                            </f:FormContainer>
+
+                            <!-- Segundo grupo -->
+                            <f:FormContainer>
+                                <f:formElements>
+                                    <f:FormElement label="{i18n>columnBookingFee}">
+                                        <f:fields>
+                                            <m:Input
+                                                value="{modeloLocal>/TravelLocal/0/BookingFee}" editable="{modeloLocal>/Editable}"
+                                            />
+                                        </f:fields>
+                                    </f:FormElement>
+                                    <f:FormElement
+                                        label="{i18n>columnTotalPrice}"
+                                    >
+                                        <f:fields>
+                                            <m:Input
+                                                value="{modeloLocal>/TravelLocal/0/TotalPrice}" editable="false"
+                                            />
+                                        </f:fields>
+                                    </f:FormElement>
+                                </f:formElements>
+                            </f:FormContainer>
+
+                            <!-- Tercer grupo -->
+                            <f:FormContainer>
+                                <f:formElements>
+                                    <f:FormElement label="{i18n>columnCurrencyCode}">
+                                        <f:fields>
+                                            <m:Input
+                                                value="{modeloLocal>/TravelLocal/0/CurrencyCode}" editable="{modeloLocal>/Editable}"
+                                            />
+                                        </f:fields>
+                                    </f:FormElement>
+                                    <f:FormElement
+                                        label="{i18n>columnMemo}"
+                                    >
+                                        <f:fields>
+                                            <m:Input
+                                                value="{modeloLocal>/TravelLocal/0/Memo}" editable="{modeloLocal>/Editable}"
+                                            />
+                                        </f:fields>
+                                    </f:FormElement>
+                                </f:formElements>
+                            </f:FormContainer>
+
+                            <!-- Cuarto grupo -->
+                            <f:FormContainer>
+                                <f:formElements>
+                                    <f:FormElement
+                                        label="{i18n>columnStatus}"
+                                    >
+                                        <f:fields>
+                                            <m:Input
+                                                value="{modeloLocal>/TravelLocal/0/Status}" editable="false"
+                                            />
+                                        </f:fields>
+                                    </f:FormElement>
+                                </f:formElements>
+                            </f:FormContainer>
+                        </f:formContainers>
+                    </f:Form>
+                </m:Panel>
+            </m:Panel>
+        </semantic:content>
+    </semantic:SemanticPage>
+</mvc:View>

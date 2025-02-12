@@ -1,0 +1,158 @@
+<mvc:View
+    controllerName="com.inetum.cursoodatav4.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:layout="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:mdc="sap.ui.mdc"
+    xmlns:mdct="sap.ui.mdc.table"
+    xmlns:vm="sap.ui.fl.variants"
+    xmlns:mdcv="sap.ui.mdc.valuehelp"
+    xmlns:mdcvc="sap.ui.mdc.valuehelp.content"
+    xmlns:ce="sap.ui.codeeditor"
+>
+    <f:DynamicPage
+        id="dynamicPageId"
+        headerExpanded="true"
+    >
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <HBox>
+                        <Title text="" />
+                    </HBox>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <f:content>
+                    <fb:FilterBar
+                        id="filterbar"
+                        persistencyKey="myPersKey"
+                        useToolbar="false"
+                        search=".onSearch"
+                        filterChange=".onFilterChange"
+                        afterVariantLoad=".onAfterVariantLoad"
+                    >
+                        <fb:filterGroupItems>
+                            <fb:FilterGroupItem
+                                name="travelID"
+                                label="{i18n>columnTravelID}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <Input
+                                        id="travelID"
+                                        width="100%"
+                                        value=""
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                            <fb:FilterGroupItem
+                                name="BeginDate"
+                                label="{i18n>columnBeginDate}"
+                                groupName="Group1"
+                                visibleInFilterBar="true"
+                            >
+                                <fb:control>
+                                    <DatePicker
+                                        id="BeginDatePicker"
+                                        width="100%"
+                                        value=""
+                                    />
+                                </fb:control>
+                            </fb:FilterGroupItem>
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <Table
+                id="idProductsTable"
+                sticky="HeaderToolbar,ColumnHeaders"
+                inset="false"
+                items="{
+							path: '/Travel'
+						}"
+                class="sapFDynamicPageAlignContent"
+                width="auto"
+                modeAnimationOn="true"
+                growing="true"
+                mode="None"
+                growingScrollToLoad="true"
+                itemPress="pressRegistro"
+                selectionChange="pressRegistro"
+            >
+                <headerToolbar>
+                    <OverflowToolbar id="otbSubheader">
+                        <ToolbarSpacer />
+
+                        <Button
+                            text="{i18n>Crear}"
+                            type="Transparent"
+                            press="onPressCreate"
+                        />
+                    </OverflowToolbar>
+                </headerToolbar>
+
+                <columns>
+                    <Column width="auto">
+                        <Text text="{i18n>columnTravelID}" />
+                    </Column>
+                    <Column width="auto">
+                        <Text text="{i18n>columnAgencyID}" />
+                    </Column>
+                    <Column width="auto">
+                        <Text text="{i18n>columnCustomerID}" />
+                    </Column>
+                    <Column width="auto">
+                        <Text text="{i18n>columnBeginDate}" />
+                    </Column>
+                    <Column width="auto">
+                        <Text text="{i18n>columnEndDate}" />
+                    </Column>
+                    <Column width="auto">
+                        <Text text="{i18n>columnBookingFee}" />
+                    </Column>
+                    <Column width="auto">
+                        <Text text="{i18n>columnTotalPrice}" />
+                    </Column>
+                    <Column width="auto">
+                        <Text text="{i18n>columnCurrencyCode}" />
+                    </Column>
+                    <Column width="auto">
+                        <Text text="{i18n>columnMemo}" />
+                    </Column>
+                    <Column width="auto">
+                        <Text text="{i18n>columnStatus}" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem
+                        press="onPress"
+                        type="Navigation"
+                    >
+                        <cells>
+                            <Text text="{TravelID}" />
+                            <Text text="{AgencyID}" />
+                            <Text text="{CustomerID}" />
+                            <Text text="{BeginDate}" />
+                            <Text text="{EndDate}" />
+                            <Text text="{BookingFee}" />
+                            <Text text="{TotalPrice}" />
+                            <Text text="{CurrencyCode}" />
+                            <Text text="{Memo}" />
+                            <Text text="{Status}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
