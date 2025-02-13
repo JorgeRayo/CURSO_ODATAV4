@@ -116,6 +116,21 @@ sap.ui.define([
         },
 
         /**
+         * Método que se ejecuta cuando salimos de la app
+         */
+        onExit: function () {
+            let oModelLocal = this.getView().getModel("modeloLocal");
+            oModelLocal.setProperty("/BookingLocal", []);
+            oModelLocal.setProperty("/TravelLocal", []);
+            // Obtener el NavContainer
+            let oParent = this.getView().getParent();
+            if (oParent) {
+                oParent.removePage(oView);
+            }
+
+        },
+
+        /**
          * Alterna el estado de edición de los datos en el modelo local.
          */
         editarRegistro: function () {
@@ -196,10 +211,9 @@ sap.ui.define([
             oBindList.filter(aFilter).requestContexts()
                 .then(aContexts => {
                     if (aContexts.length > 0) {
-                        aContexts[0].delete();
-                        aContexts[0].getModel().submitBatch("updateGroup");
-                    } else {
-                        throw new Error("No se encontró el registro a eliminar.");
+                        let oContext = aContexts[0];
+                        oContext.delete();
+                        oContext.getModel().submitBatch("updateGroup");
                     }
                 })
                 .then(() => {
